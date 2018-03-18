@@ -1,1 +1,4 @@
-<img [src]="imageSource"/>
+<span class="card" (click)="cardClick()">
+  <img [hidden]="!opened" class="card-image open" [src]="imageSource"/>
+  <img [hidden]="opened" class="card-image hidden" src="/assets/cardback.jpg"/>
+</span>

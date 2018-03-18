@@ -10,11 +10,16 @@ export class CardComponent implements OnInit {
 
   @Input() imageId: string;
   imageSource: string;
+  opened:boolean = false;
 
   constructor(private imageLoaderService: ImageLoaderService) { }
 
   ngOnInit() {
     this.imageSource = this.imageLoaderService.getSrc(this.imageId);
+  }
+
+  cardClick() {
+    this.opened = !this.opened;
   }
 
 }
