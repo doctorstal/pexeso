@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ImageLoaderService} from "../image-loader.service";
 
 @Component({
@@ -9,8 +9,10 @@ import {ImageLoaderService} from "../image-loader.service";
 export class CardComponent implements OnInit {
 
   @Input() imageId: string;
+  @Input() opened: boolean = false;
+  @Output() cardClick: EventEmitter<void> = new EventEmitter();
+
   imageSource: string;
-  opened:boolean = false;
 
   constructor(private imageLoaderService: ImageLoaderService) { }
 
@@ -18,8 +20,8 @@ export class CardComponent implements OnInit {
     this.imageSource = this.imageLoaderService.getSrc(this.imageId);
   }
 
-  cardClick() {
-    this.opened = !this.opened;
+  onClick() {
+    this.cardClick.emit();
   }
 
 }

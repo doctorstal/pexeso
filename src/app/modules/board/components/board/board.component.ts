@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChildren} from '@angular/core';
+import {BoardGameService, Card} from "../../services/board-game.service";
 
 @Component({
   selector: 'app-board',
@@ -6,18 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
-  rows: string[][];
+  cards: Card[];
 
-  constructor() {
-    this.rows = [
-      ['1','2','2','3'],
-      ['4','1','4','5'],
-      ['6','7','8','3'],
-      ['7','5','6','8'],
-    ];
+  constructor(private gameService: BoardGameService) {
+    this.cards = this.gameService.getCards(16);
   }
 
   ngOnInit() {
   }
 
+  cardClick(card: Card) {
+    card.opened = !card.opened;
+  }
 }
