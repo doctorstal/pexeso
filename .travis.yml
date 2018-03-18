@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+ - "9.4.0"
+
+before_script:
+ - npm install --quiet
+
+script: npm run build
