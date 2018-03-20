@@ -12,14 +12,16 @@ import {
 } from "rxjs/operators";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/observable/interval";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
 @Injectable()
 export class BoardGameService {
-  private cards: Card[];
+
   private openedCard: Card;
 
   public cardOpen$: Subject<Card> = new Subject();
   public guessedCards$: EventEmitter<Card[]> = new EventEmitter();
+  public cards$: BehaviorSubject<Card[]> = new BehaviorSubject<Card[]>(null);
 
   constructor() {
     this.cardOpen$
@@ -63,15 +65,15 @@ export class BoardGameService {
 
   restart(num: number) {
     let range = Array.from(Array(num / 2).keys());
-    this.cards = shuffle(
+    this.cards$.next(shuffle(
       range
         .concat(range)
         .map(n => new Card(n.toString()))
-    );
+    ));
   }
 
   getCards(): Card[] {
-    return this.cards;
+    return this.cards$.value;
   }
 }
 

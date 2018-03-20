@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChildren} from '@angular/core';
 import {BoardGameService, Card} from "../../services/board-game.service";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-board',
@@ -7,11 +8,10 @@ import {BoardGameService, Card} from "../../services/board-game.service";
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
-  cards: Card[];
+  cards$: Observable<Card[]>;
 
   constructor(private gameService: BoardGameService) {
-    this.gameService.restart(16);
-    this.cards = this.gameService.getCards();
+    this.cards$ = this.gameService.cards$;
   }
 
   ngOnInit() {

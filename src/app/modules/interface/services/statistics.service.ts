@@ -6,12 +6,15 @@ import {
   merge,
   tap
 } from "rxjs/operators";
+import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class StatisticsService {
   change$: Observable<Stats>;
 
-  currentStats: Stats = { score: 0, flips: 0 };
+  private restart$: Subject<void> = new Subject();
+
+  currentStats: Stats;
 
   constructor(private gameService: BoardGameService) {
     let flips$ = gameService
@@ -22,12 +25,19 @@ export class StatisticsService {
       .guessedCards$.pipe(
         tap(() => this.currentStats.score++)
       );
+    this.restart$
+      .subscribe(() => this.currentStats = { score: 0, flips: 0 });
+
     this.change$ = flips$.pipe(
         merge(score$),
-        map(() => this.currentStats)
-      )
+        merge(this.restart$),
+        map(() => this.currentStats),
+      );
   }
 
+  restart() {
+    this.restart$.next();
+  }
 }
 
 export type Stats = {
