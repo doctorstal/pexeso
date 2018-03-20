@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ImageLoaderService} from "../image-loader.service";
+import {Card} from "../../services/board-game.service";
 
 @Component({
   selector: 'app-card',
@@ -8,8 +9,7 @@ import {ImageLoaderService} from "../image-loader.service";
 })
 export class CardComponent implements OnInit {
 
-  @Input() imageId: string;
-  @Input() opened: boolean = false;
+  @Input() card: Card;
   @Output() cardClick: EventEmitter<void> = new EventEmitter();
 
   imageSource: string;
@@ -17,7 +17,7 @@ export class CardComponent implements OnInit {
   constructor(private imageLoaderService: ImageLoaderService) { }
 
   ngOnInit() {
-    this.imageSource = this.imageLoaderService.getSrc(this.imageId);
+    this.imageSource = this.imageLoaderService.getSrc(this.card.id);
   }
 
   onClick() {

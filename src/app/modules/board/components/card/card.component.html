@@ -1,4 +1,6 @@
 <span class="card" (click)="onClick()">
-  <img [hidden]="!opened" class="card-image open" [src]="imageSource"/>
-  <img [hidden]="opened" class="card-image hidden" src="/assets/cardback.jpg"/>
+  <img
+       [ngClass]="{'card-image':true, 'open': card.opened, 'guessed':card.guessed}"
+       [src]="imageSource"/>
+  <img *ngIf="!card.opened" class="card-image back" src="/assets/cardback.jpg">
 </span>
