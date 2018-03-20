@@ -14,7 +14,8 @@ describe('BoardGameService', () => {
   }));
 
   it('should generate cards', inject([BoardGameService], (service: BoardGameService) => {
-    expect(service.getCards(16).length).toBe(16);
-    expect(() => service.getCards(15)).toThrow();
+    expect(service.restart(16));
+    expect(service.getCards().length).toBe(16);
+    expect(() => service.restart(15)).toThrow();
   }));
 });

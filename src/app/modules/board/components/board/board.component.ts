@@ -10,13 +10,14 @@ export class BoardComponent implements OnInit {
   cards: Card[];
 
   constructor(private gameService: BoardGameService) {
-    this.cards = this.gameService.getCards(16);
+    this.gameService.restart(16);
+    this.cards = this.gameService.getCards();
   }
 
   ngOnInit() {
   }
 
   cardClick(card: Card) {
-    card.opened = !card.opened;
+    this.gameService.cardOpen$.next(card);
   }
 }
