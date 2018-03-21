@@ -1,6 +1,16 @@
-<span class="card" (click)="onClick()">
-  <img
-       [ngClass]="{'card-image':true, 'open': card.opened, 'guessed':card.guessed}"
-       [src]="imageSource"/>
-  <img *ngIf="!card.opened" class="card-image back" src="/assets/cardback.jpg">
-</span>
+<!--<span class="card" >
+    <img
+         [ngClass]="{'card-image':true, 'open': card.opened, 'guessed':card.guessed}"
+         [src]="imageSource"/>
+    <img (click)="onClick()" *ngIf="!card.opened" class="card-image back" src="/assets/cardback.jpg">
+</span>-->
+<div [ngClass]="{'flip-container': true, 'open':card.opened }">
+  <div class="flipper">
+    <div class="front">
+      <img (click)="onClick()" src="/assets/cardback.jpg">
+    </div>
+    <div class="back">
+      <img [src]="imageSource" [ngClass]="{'guessed':card.guessed}"/>
+    </div>
+  </div>
+</div>

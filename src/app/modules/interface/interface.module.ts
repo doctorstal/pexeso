@@ -4,10 +4,12 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import {StatisticsService} from "./services/statistics.service";
 import { RestartButtonComponent } from './components/restart-button/restart-button.component';
 import {AppStateService} from "./services/app-state.service";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   providers:[ StatisticsService, AppStateService],
   exports: [StatisticsComponent, RestartButtonComponent],

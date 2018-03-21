@@ -1,3 +1,4 @@
-<span *ngFor="let card of cards$ | async">
+<ng-container *ngFor="let card of cards$ | async; let i=index">
     <app-card [card]="card" (cardClick)="cardClick(card)"></app-card>
-</span>
+    <br *ngIf="(i + 1) % 8==0"/>
+</ng-container>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {BoardGameService} from "../../board/services/board-game.service";
 import {Observable} from "rxjs/Observable";
 import {
+  filter,
   map,
   merge,
   tap

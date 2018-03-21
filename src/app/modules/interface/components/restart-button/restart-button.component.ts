@@ -8,12 +8,15 @@ import {AppStateService} from "../../services/app-state.service";
 })
 export class RestartButtonComponent implements OnInit {
 
+  pairs: number = 20;
+  keyword: string = 'lego';
+
   constructor(private appState: AppStateService) { }
 
   ngOnInit() {
   }
 
   onRestartClick() {
-    this.appState.restart();
+    this.appState.restart(this.pairs, this.keyword);
   }
 }
