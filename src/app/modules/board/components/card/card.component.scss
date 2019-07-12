@@ -47,15 +47,23 @@
   transform: rotateY(180deg);
 }
 
-@keyframes guessed-kf {
+@keyframes grayscale-kf {
   0% { filter: grayscale(0%) }
   100% { filter: grayscale(100%) }
 }
 
-.guessed {
+.greyscale {
   filter: grayscale(100%);
-  animation: guessed-kf 1s;
+  animation: grayscale-kf 1s;
 }
 
+.guessed {
+  @extend .greyscale;
+}
+
+.disabled {
+  @extend .greyscale;
+  cursor: default;
+}
 
 

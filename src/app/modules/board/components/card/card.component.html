@@ -1,10 +1,10 @@
 <div [ngClass]="{'flip-container': true, 'open':card.opened }">
   <div class="flipper">
     <div class="front">
-      <img (click)="onClick()" src="assets/cardback.jpg">
+      <img src="assets/cardback.jpg" (click)="loaded && onClick()" [ngClass]="{'disabled':!loaded}">
     </div>
     <div class="back">
-      <img [src]="imageSource" [ngClass]="{'guessed':card.guessed}"/>
+      <img [src]="imageSource" [ngClass]="{'guessed':card.guessed}" (load)="onLoad()"/>
     </div>
   </div>
 </div>
